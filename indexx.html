@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blue Ocean - Ocean Protection</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="login.php">Login</a>
+      <a href="register.php">Register</a>
+    </nav>
+  </header>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue1: #003366;
+      --blue2: #0077be;
+      --blue3: #00bfff;
+      --blue4: #66e0ff;
+      --green1: #00e6c3;
+      --white: #ffffff;
+      --gray: #f4f6f8;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--blue1) 0%, var(--blue2) 50%, var(--blue3) 100%);
+      color: var(--white);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    nav {
+      background: rgba(0, 51, 102, 0.95);
+      padding: 1.2rem 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin: 0 22px;
+      font-weight: bold;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    nav a:hover, nav a.active {
+      background: var(--blue3);
+      color: var(--blue1);
+    }
+    header {
+      background: linear-gradient(120deg, var(--blue2) 60%, var(--green1) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 4.5rem 1rem 2.5rem 1rem;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.13);
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.7rem;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 8px #0077be55;
+    }
+    header p {
+      font-size: 1.3rem;
+      font-weight: 500;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 3px #004e9240;
+    }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin: 0 auto 2.5rem auto;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, var(--blue3) 70%, var(--green1) 100%);
+      color: var(--blue1);
+      padding: 2rem 2.2rem;
+      border-radius: 22px;
+      box-shadow: 0 4px 18px #00bfff33;
+      text-align: center;
+      min-width: 170px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+      user-select: none;
+      transition: transform 0.25s;
+    }
+    .stat-card strong {
+      display: block;
+      font-size: 2.2rem;
+      margin-bottom: 0.3rem;
+      font-weight: 900;
+      color: var(--blue1);
+      text-shadow: 0 0 8px #00bfff44;
+    }
+    .stat-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px #00bfff99;
+    }
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin: 0 0 2.5rem 0;
+    }
+    .topic-card {
+      background: linear-gradient(120deg, var(--blue1) 60%, var(--blue3) 100%);
+      color: var(--white);
+      border-radius: 25px;
+      padding: 2.5rem 1.5rem;
+      box-shadow: 0 8px 30px #00336633;
+      font-weight: 700;
+      font-size: 1.22rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      user-select: none;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .topic-card:hover {
+      background: linear-gradient(120deg, var(--blue3) 60%, var(--green1) 100%);
+      color: var(--blue1);
+      transform: translateY(-8px) scale(1.04);
+      box-shadow: 0 15px 40px #00e6c355;
+    }
+    section {
+      max-width: 1000px;
+      margin: 2.5rem auto;
+      background: linear-gradient(135deg, #e0f7fa 60%, #c1eaff 100%);
+      color: var(--blue1);
+      border-radius: 32px;
+      box-shadow: 0 10px 40px #00bfff22;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+      color: var(--blue2);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 6px #00bfff44;
+    }
+    h3 {
+      color: var(--blue2);
+      margin-top: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+    ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    p {
+      font-size: 1.08rem;
+      font-weight: 500;
+      max-width: 900px;
+      margin-bottom: 1rem;
+    }
+    .cta-btn {
+      align-self: center;
+      background: linear-gradient(135deg, var(--blue2), var(--green1));
+      color: var(--white);
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 40px;
+      font-size: 1.18rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 30px #00bfff99;
+      transition: box-shadow 0.3s, transform 0.3s;
+      user-select: none;
+      margin-top: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .cta-btn:hover {
+      box-shadow: 0 15px 50px #00e6c399;
+      transform: translateY(-6px);
+      background: linear-gradient(135deg, var(--green1), var(--blue2));
+      color: var(--blue1);
+    }
+    form {
+      max-width: 420px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      color: var(--blue1);
+      font-weight: 600;
+    }
+    label {
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+    input, textarea {
+      margin-top: 0.4rem;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      border: 2px solid var(--blue3);
+      font-size: 1rem;
+      font-weight: 500;
+      resize: vertical;
+      transition: border-color 0.3s;
+      background: #e0f7fa;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--blue2);
+      box-shadow: 0 0 8px var(--blue3);
+    }
+    button[type="submit"] {
+      background: var(--blue2);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 1rem 0;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 30px #00bfff99;
+      transition: box-shadow 0.3s, transform 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    button[type="submit"]:hover {
+      box-shadow: 0 15px 50px #00e6c399;
+      transform: translateY(-6px);
+      background: var(--green1);
+      color: var(--blue1);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      color: var(--white);
+      font-weight: 600;
+      letter-spacing: 1px;
+      user-select: none;
+      border-radius: 40px 40px 0 0;
+      margin-top: 4rem;
+    }
+    @media (max-width: 720px) {
+      header h1 {
+        font-size: 2.1rem;
+      }
+      .stats {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .topic-card {
+        font-size: 1.02rem;
+        padding: 1.5rem 0.7rem;
+      }
+      section {
+        padding: 1.5rem 0.7rem;
+      }
+      .section-title {
+        font-size: 1.25rem;
+      }
+      form {
+        max-width: 100%;
+      }
+    }
+  </style>
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({behavior: 'smooth'});
+    }
+  </script>
+<body>
+  <nav>
+    <a href="#home" class="active">Home</a>
+    <a href="#extinction">Extinction Crisis</a>
+    <a href="#pollution">Ocean Pollution</a>
+    <a href="#overfishing">Overfishing</a>
+    <a href="#endangered">Endangered Species</a>
+    <a href="#organize">Organize Cleanup</a>
+    <a href="#collaborate">Collaborate</a>
+    <a href="#advocacy">Advocacy</a>
+  </nav>
+
+  <header id="home" tabindex="-1">
+    <h1>Blue Ocean</h1>
+    <p>Join our movement to eliminate ocean waste and protect marine ecosystems</p>
+  </header>
+
+  <section>
+    <div class="stats" aria-label="Ocean protection statistics">
+      <div class="stat-card" role="region" aria-labelledby="stat1">
+        <strong id="stat1">8 million tons</strong>
+        enter oceans annually
+      </div>
+      <div class="stat-card" role="region" aria-labelledby="stat2">
+        <strong id="stat2">100,000+</strong>
+        animals die yearly
+      </div>
+      <div class="stat-card" role="region" aria-labelledby="stat3">
+        <strong id="stat3">10,000+</strong>
+        volunteers active
+      </div>
+    </div>
+    <div class="topics" role="list" aria-label="Main topics">
+      <div class="topic-card" role="listitem" tabindex="0" onclick="scrollToSection('extinction')" onkeypress="if(event.key==='Enter')scrollToSection('extinction')">Discover the rainforests of the sea</div>
+      <div class="topic-card" role="listitem" tabindex="0" onclick="scrollToSection('pollution')" onkeypress="if(event.key==='Enter')scrollToSection('pollution')">How invisible particles harm ecosystems</div>
+      <div class="topic-card" role="listitem" tabindex="0" onclick="scrollToSection('overfishing')" onkeypress="if(event.key==='Enter')scrollToSection('overfishing')">Innovations saving our oceans</div>
+      <div class="topic-card" role="listitem" tabindex="0" onclick="scrollToSection('organize')" onkeypress="if(event.key==='Enter')scrollToSection('organize')">Join beach cleanups</div>
+      <div class="topic-card" role="listitem" tabindex="0" onclick="scrollToSection('advocacy')" onkeypress="if(event.key==='Enter')scrollToSection('advocacy')">Fund research & Spread awareness</div>
+    </div>
+  </section>
+
+  <section id="extinction" tabindex="-1" aria-label="Extinction Crisis">
+    <div class="section-title">Extinction Crisis</div>
+    <p>
+      Over 1 million marine species are at risk of extinction due to human activities. Coral reefs, often called the "rainforests of the sea," are dying at alarming rates.
+    </p>
+    <h3>Main Causes:</h3>
+    <ul>
+      <li>Pollution (plastic, chemicals, oil spills)</li>
+      <li>Climate change (warming, acidification)</li>
+      <li>Overfishing</li>
+      <li>Loss of habitat</li>
+    </ul>
+    <h3>What can we do?</h3>
+    <ul>
+      <li>Support marine protected areas</li>
+      <li>Reduce plastic use</li>
+      <li>Participate in cleanups</li>
+      <li>Advocate for sustainable fishing</li>
+    </ul>
+    <button class="cta-btn" onclick="scrollToSection('organize')">Organize a Cleanup Event</button>
+  </section>
+
+  <section id="pollution" tabindex="-1" aria-label="Ocean Pollution">
+    <div class="section-title">Ocean Pollution</div>
+    <p>
+      Every year, over 8 million tons of plastic end up in our oceans. Microplastics, oil spills, and chemical runoff threaten marine life and human health.
+    </p>
+    <h3>Major Sources:</h3>
+    <ul>
+      <li>Single-use plastics</li>
+      <li>Industrial and agricultural runoff</li>
+      <li>Untreated sewage</li>
+      <li>Oil spills</li>
+    </ul>
+    <h3>How You Can Help:</h3>
+    <ul>
+      <li>Reduce plastic use and recycle properly</li>
+      <li>Participate in local cleanups</li>
+      <li>Support policies that protect waterways</li>
+    </ul>
+    <button class="cta-btn" onclick="scrollToSection('organize')">Organize a Cleanup Event</button>
+  </section>
+
+  <section id="overfishing" tabindex="-1" aria-label="Overfishing">
+    <div class="section-title">Overfishing</div>
+    <p>
+      Overfishing has reduced fish populations to unsustainable levels, threatening food security and ocean health. Many species are now endangered, and entire ecosystems are at risk.
+    </p>
+    <h3>Consequences:</h3>
+    <ul>
+      <li>Loss of biodiversity</li>
+      <li>Disruption of food chains</li>
+      <li>Economic impact on fishing communities</li>
+    </ul>
+    <h3>Solutions:</h3>
+    <ul>
+      <li>Support sustainable seafood choices</li>
+      <li>Enforce fishing regulations</li>
+      <li>Promote alternative livelihoods for fishermen</li>
+    </ul>
+    <button class="cta-btn" onclick="scrollToSection('organize')">Organize a Cleanup Event</button>
+  </section>
+
+  <section id="endangered" tabindex="-1" aria-label="Endangered Ocean Species">
+    <div class="section-title">Endangered Ocean Species</div>
+    <ul>
+      <li><strong>Hawksbill Sea Turtle:</strong> Critically endangered due to illegal trade and habitat loss.</li>
+      <li><strong>Vaquita:</strong> The world’s rarest marine mammal, with fewer than 10 left in the wild.</li>
+      <li><strong>Blue Whale:</strong> The largest animal on Earth, threatened by ship strikes and entanglement.</li>
+      <li><strong>Hammerhead Shark:</strong> Overfished for fins, now endangered.</li>
+    </ul>
+    <h3>How to Help:</h3>
+    <ul>
+      <li>Support conservation organizations</li>
+      <li>Reduce plastic and chemical pollution</li>
+      <li>Promote sustainable seafood</li>
+      <li>Participate in awareness campaigns</li>
+    </ul>
+    <button class="cta-btn" onclick="scrollToSection('organize')">Organize a Cleanup Event</button>
+  </section>
+
+  <section id="organize" tabindex="-1" aria-label="Organize Cleanup Event">
+    <div class="section-title">Organize a Cleanup Event</div>
+    <form onsubmit="alert('This is a demo form. Backend integration required.'); return false;">
+      <label>Your Name:
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label>Your Email:
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label>Event Location:
+        <input type="text" name="location" required />
+      </label>
+      <label>Date:
+        <input type="date" name="date" required />
+      </label>
+      <label>Event Details:
+        <textarea name="details" rows="4" required></textarea>
+      </label>
+      <button type="submit">Submit Event</button>
+    </form>
+    <p style="margin-top:20px; color: var(--blue2); font-weight: 600;">
+      After submitting, our team will review and help you promote your event!
+    </p>
+  </section>
+  <section id="collaborate" tabindex="-1">
+    <div class="section-title">Collaborate with Us</div>
+    <p>
+      We invite NGOs, schools, colleges, and community groups to join forces with Blue Ocean. Together, we can amplify our impact through education, research, and large-scale cleanup campaigns.
+    </p>
+    <ul>
+      <li>Partner on awareness and educational programs</li>
+      <li>Co-organize local and regional ocean cleanup events</li>
+      <li>Share resources and expertise for marine conservation</li>
+      <li>Engage youth and communities in sustainable practices</li>
+    </ul>
+    <form action="collab_submit.php" method="POST">
+      <label>Your Organization Name:</label>
+      <input type="text" name="organization" required><br>
+    
+      <label>Contact Person:</label>
+      <input type="text" name="contact" required><br>
+    
+      <label>Email:</label>
+      <input type="email" name="email" required><br>
+    
+      <label>Message:</label>
+      <textarea name="message" required></textarea><br>
+    
+      <button type="submit">Send Collaboration Request</button>
+    </form>    
+  </section>
+  <section id="advocacy" tabindex="-1" aria-label="Advocate for Ocean Protection Policies">
+    <div class="section-title">Advocate for Ocean Protection Policies</div>
+    <p>Your voice matters! Suggest policies or send a message to government leaders to encourage stronger ocean protection laws and actions.</p>
+    <form onsubmit="alert('This is a demo form. Backend integration required.'); return false;">
+      <label>Your Name:
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label>Your Email:
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label>Your Message or Policy Suggestion:
+        <textarea name="message" rows="4" required placeholder="Suggest a policy or write your message to the government..."></textarea>
+      </label>
+      <button type="submit">Send Advocacy Message</button>
+    </form>
+    <p style="margin-top:16px; color: var(--blue3); font-weight: 600;">Thank you for speaking up for our oceans!</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Blue Ocean | Protecting our oceans together.
+  </footer>
+</body>
+</html>
